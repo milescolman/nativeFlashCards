@@ -3,6 +3,7 @@ import { StyleSheet, Platform, View, Text, StatusBar } from 'react-native'
 import { TabNavigator , StackNavigator, DrawerNavigator} from 'react-navigation'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
+import Deck from './components/Deck'
 import { Constants } from 'expo'
 import { white, purple } from './utils/colors'
 
@@ -41,12 +42,28 @@ const Tabs = TabNavigator({
   }
 })
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      tabBarLabel: 'dynamic deck name',
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  }
+})
+
 export default class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
         <UdaciStatusBar backgroundColor={purple} barStyle='light-content'/>
-        <Tabs />
+        <MainNavigator />
       </View>
     );
   }

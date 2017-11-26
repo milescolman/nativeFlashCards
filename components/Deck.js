@@ -3,12 +3,12 @@ import { View, Text, TouchableOpacity } from 'react-native'
 
 class Deck extends Component {
   render ()  {
-
+    const { state } = this.props.navigation
     return (
       <View>
         <View>
-          <Text>{this.props.title}</Text>
-          <Text>{this.props.cards.length} cards</Text>
+          <Text>{state.params.title}</Text>
+          <Text>{state.params.questions.length} cards</Text>
         </View>
         <View>
           <TouchableOpacity>

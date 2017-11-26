@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 
 import DeckTitle from './DeckTitle'
 
 class DeckList extends Component {
-
+  static navigationOptions = {
+    title: 'Welcome to DeckList'
+  }
   render () {
     const styles = StyleSheet.create({
       container: {
@@ -37,7 +39,7 @@ class DeckList extends Component {
       ]
     }
   }
-
+  const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         {Object.keys(decks).map(key => (
@@ -45,13 +47,20 @@ class DeckList extends Component {
             style={{flex: 1, justifyContent: 'space-around', borderBottomWidth: 1}}
             key={key}
           >
-            <DeckTitle
-              title={decks[key]['title']}
-              cards={decks[key]['questions']}
-            />
-          </View>
+            <TouchableOpacity
+              onPress={() =>
+                (
+                  navigate('Deck', {title: decks[key]['title'], questions: decks[key]['questions']})
+                )}
+            >
+              <DeckTitle
+                title={decks[key]['title']}
+                cards={decks[key]['questions']}
+              />
+            </TouchableOpacity>
+            </View>
         ))}
       </View>
-  )}
+        )}
 }
 export default DeckList
