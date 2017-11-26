@@ -19,7 +19,7 @@ const Tabs = TabNavigator({
       screen: DeckList,
       navigationOptions: {
         tabBarLabel: "Decks",
-        tabBarIcon: ({tintColor }) => <MaterialCommunityIcons name='cards' size={30}  color={tintColor}/>
+        tabBarIcon: ({tintColor }) => <MaterialCommunityIcons name='cards' size={25}  color={tintColor}/>
       }
   },
 },
@@ -28,7 +28,7 @@ const Tabs = TabNavigator({
     activeTintColor: Platform.OS === 'ios' ? purple : white,
     showIcon: true,
     style: {
-      height : 56,
+      height : 60,
       backgroundColor: Platform.OS === 'ios' ? white : purple,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
