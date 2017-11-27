@@ -48,13 +48,9 @@ const MainNavigator = StackNavigator({
   },
   Deck: {
     screen: Deck,
-    navigationOptions: {
-      tabBarLabel: 'dynamic deck name',
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-      }
-    }
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.title}`,
+    }),
   }
 })
 
