@@ -6,6 +6,7 @@ import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import Quiz from './components/Quiz'
 import NewDeck from './components/NewDeck'
+import NewQuestion from './components/NewQuestion'
 import { Constants } from 'expo'
 import { white, purple } from './utils/colors'
 
@@ -27,7 +28,7 @@ const Tabs = TabNavigator({
   },
   NewDeck: {
     screen: NewDeck,
-  }
+  },
 },
 {
   tabBarOptions: {
@@ -60,6 +61,10 @@ const MainNavigator = StackNavigator({
       headerMode: 'screen',
       title: `${navigation.state.params.title}`,
     }),
+  },
+  NewQuestion: {
+    screen: NewQuestion,
+    navigationOptions: {title: 'Add Card'},
   },
   Quiz: {
     screen: Quiz,
