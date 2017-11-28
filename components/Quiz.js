@@ -98,7 +98,8 @@ export default class Quiz extends Component {
           <View>
             <Animated.View style={[styles.frontAnimatedStyle, {alignItems: 'center', backfaceVisibility: 'hidden', backgroundColor: 'white', opacity: this.frontOpacity,}]}>
               <Text style={{fontSize: 30, textAlign: 'center'}}>
-                {question}
+                question text
+                {/* {question} */}
               </Text>
               <TouchableOpacity
                 onPress={() => this.flipCard()}
