@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
-
+import { getDecks } from '../utils/storageAPI'
 import DeckTitle from './DeckTitle'
 
 class DeckList extends Component {
+  state = { decks: {}}
+
   static navigationOptions = {
     title: 'Welcome to DeckList',
     headerMode: 'none',
   }
+
+  componentDidMount () {
+    getDecks().then((decks) => this.setState({decks}))
+  }
+
   render () {
     const styles = StyleSheet.create({
       container: {
@@ -15,31 +22,10 @@ class DeckList extends Component {
         alignItems: 'stretch',
       }
     })
-    let decks = {
-    React: {
-      title: 'React',
-      questions: [
-        {
-          question: 'What is React?',
-          answer: 'A library for managing user interfaces'
-        },
-        {
-          question: 'Where do you make Ajax requests in React?',
-          answer: 'The componentDidMount lifecycle event'
-        }
-      ]
-    },
-    JavaScript: {
-      title: 'JavaScript',
-      questions: [
-        {
-          question: 'What is a closure?',
-          answer: 'The combination of a function and the lexical environment within which that function was declared.'
-        }
-      ]
-    }
-  }
-  const { navigate } = this.props.navigation
+
+    const decks = this.state.decks
+
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         {Object.keys(decks).map(key => (

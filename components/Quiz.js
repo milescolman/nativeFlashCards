@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native'
 
+import { getDeck } from '../utils/storageAPI'
+
 export default class Quiz extends Component {
   state = {
     questionIdx: 0,
-    status: 'showQuestion',
-    showAnswer: false,
+    deck: {questions: []},
   }
 
   componentWillMount() {
@@ -31,11 +32,13 @@ export default class Quiz extends Component {
       outputRange: [1, 0],
     })
   }
+
+  componentDidMount() {
+    const id = this.props.navigation.state.params.title
+    getDeck(id).then(deck => this.setState({deck}))
+  }
+
   flipCard ()  {
-    // this.setStrrate((state) => ({
-    //   ...state,
-    //   showAnswer: !state.showAnswer,
-    // }))
     if (this.value >= 90) {
       Animated.timing(this.animatedValue, {
         toValue: 0,
@@ -72,48 +75,49 @@ export default class Quiz extends Component {
         transform: [
           { rotateY: this.frontInterpolate}
         ],
-        // opacity: this.frontOpacity,
       },
       backAnimatedStyle: {
         transform: [
           { rotateY: this.backInterpolate}
         ],
-        // opacity: this.backOpacity
       }
     })
     const { navigate } = this.props.navigation
     const { state } = this.props.navigation
+    const question = !!this.state.deck.questions[0] && `${this.state.deck.questions[this.state.questionIdx].question}`
+    const answer = !!this.state.deck.questions[0] && `${this.state.deck.questions[this.state.questionIdx].answer}`
 
     return (
       <View style={{flex: 1, backgroundColor: 'white'}}>
         <View style={{flex: 1}}>
           <Text>
-            2 / 2 to be replaced with progress through quiz
+            {this.state.questionIdx + 1} / {this.state.deck.questions.length}
           </Text>
         </View>
         <View style={[styles.alignment, ]}>
           <View>
             <Animated.View style={[styles.frontAnimatedStyle, {alignItems: 'center', backfaceVisibility: 'hidden', backgroundColor: 'white', opacity: this.frontOpacity,}]}>
               <Text style={{fontSize: 30, textAlign: 'center'}}>
-                'The answer from the store'
-              </Text>
-              <TouchableOpacity
-                onPress={() => this.flipCard()}
-              >
-                <Text style={{color: 'red'}}>
-                  Question
-                </Text>
-              </TouchableOpacity>
-            </Animated.View>
-            <Animated.View style={[styles.backAnimatedStyle, styles.flipCardBack, {alignItems: 'center', backfaceVisibility: 'hidden', backgroundColor: 'white', opacity: this.backOpacity}]}>
-              <Text style={{fontSize: 30, textAlign: 'center'}}>
-                'The question from the store'
+                {question}
               </Text>
               <TouchableOpacity
                 onPress={() => this.flipCard()}
               >
                 <Text style={{color: 'red'}}>
                   Answer
+                </Text>
+              </TouchableOpacity>
+            </Animated.View>
+            <Animated.View style={[styles.backAnimatedStyle, styles.flipCardBack, {alignItems: 'center', backfaceVisibility: 'hidden', backgroundColor: 'white', opacity: this.backOpacity}]}>
+              <Text style={{fontSize: 30, textAlign: 'center'}}>
+                answer text
+                {/* {answer} */}
+              </Text>
+              <TouchableOpacity
+                onPress={() => this.flipCard()}
+              >
+                <Text style={{color: 'red'}}>
+                  Question
                 </Text>
               </TouchableOpacity>
             </Animated.View>

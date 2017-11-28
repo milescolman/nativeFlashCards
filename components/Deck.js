@@ -40,7 +40,8 @@ class Deck extends Component {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigate('Quiz', {
-              questions: state.params.questions
+              //questions: state.params.questions,
+              title: state.params.title,
             })}
             style={[styles.button, {backgroundColor: '#000'}]}>
             <Text style={{color: '#fff', fontSize: 20}}>
