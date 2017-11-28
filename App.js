@@ -45,14 +45,22 @@ const Tabs = TabNavigator({
 const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
+    navigationOptions: {
+      headerMode: 'none',
+    },
   },
   Deck: {
     screen: Deck,
     navigationOptions: ({ navigation }) => ({
+      headerMode: 'screen',
       title: `${navigation.state.params.title}`,
     }),
-  }
-})
+  },
+},
+{
+  headerMode: 'screen', // QUESTION: can't configure for individual screens?
+}
+)
 
 export default class App extends React.Component {
   render() {

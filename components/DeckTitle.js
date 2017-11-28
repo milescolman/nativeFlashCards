@@ -11,7 +11,7 @@ export default function DeckTitle (props) {
     }
   })
   return (
-    <View style={[styles.alignment]} 
+    <View style={styles.alignment} 
       onClick={props.onClick}>
       <Text style={styles.title}>
         {props.title}

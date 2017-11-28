@@ -5,16 +5,16 @@ import DeckTitle from './DeckTitle'
 
 class DeckList extends Component {
   static navigationOptions = {
-    title: 'Welcome to DeckList'
+    title: 'Welcome to DeckList',
+    headerMode: 'none',
   }
   render () {
     const styles = StyleSheet.create({
       container: {
         flex: 1,
-        alignItems: 'stretch'
+        alignItems: 'stretch',
       }
     })
-
     let decks = {
     React: {
       title: 'React',
