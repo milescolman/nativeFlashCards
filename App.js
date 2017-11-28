@@ -4,6 +4,7 @@ import { TabNavigator , StackNavigator, DrawerNavigator} from 'react-navigation'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
+import Quiz from './components/Quiz'
 import { Constants } from 'expo'
 import { white, purple } from './utils/colors'
 
@@ -56,6 +57,12 @@ const MainNavigator = StackNavigator({
       title: `${navigation.state.params.title}`,
     }),
   },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Quiz'
+    })
+  }
 },
 {
   headerMode: 'screen', // QUESTION: can't configure for individual screens?

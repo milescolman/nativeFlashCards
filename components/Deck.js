@@ -22,7 +22,7 @@ class Deck extends Component {
         margin: 5,
       }
     })
-
+    const { navigate } = this.props.navigation
     const { state } = this.props.navigation
     return (
       <View style={styles.alignment}>
@@ -32,12 +32,16 @@ class Deck extends Component {
         </View>
         <View>
           <TouchableOpacity style={styles.button}>
-            <Text>
+            <Text style={{fontSize: 20}}>
               Add Card
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, {backgroundColor: '#000'}]}>
-            <Text style={{color: '#fff'}}>
+          <TouchableOpacity
+            onPress={() => navigate('Quiz', {
+              questions: state.params.questions
+            })}
+            style={[styles.button, {backgroundColor: '#000'}]}>
+            <Text style={{color: '#fff', fontSize: 20}}>
               Start Quiz
             </Text>
           </TouchableOpacity>
