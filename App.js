@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import Quiz from './components/Quiz'
+import NewDeck from './components/NewDeck'
 import { Constants } from 'expo'
 import { white, purple } from './utils/colors'
 
@@ -24,6 +25,9 @@ const Tabs = TabNavigator({
         tabBarIcon: ({tintColor }) => <MaterialCommunityIcons name='cards' size={25}  color={tintColor}/>
       }
   },
+  NewDeck: {
+    screen: NewDeck,
+  }
 },
 {
   tabBarOptions: {
