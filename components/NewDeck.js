@@ -26,7 +26,7 @@ export default class NewDeck extends Component {
         margin: 5,
       }
     })
-    const { goBack } = this.props.navigation
+    const { navigate } = this.props.navigation
 
     return (
       <View style={styles.container}>
@@ -43,7 +43,7 @@ export default class NewDeck extends Component {
           onPress={() => {
             saveDeckTitle(this.state.text)
             DeviceEventEmitter.emit('deck list refresh', {})
-            goBack()
+            navigate('Deck', {title: this.state.text})
           }}
           style={[styles.button, {backgroundColor: 'black'}]}>
           <Text style={{color: 'white'}}>Submit</Text>
