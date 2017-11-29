@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, DeviceEventEmitter } from 'react-native'
+
 import { getDecks } from '../utils/storageAPI'
 import DeckTitle from './DeckTitle'
 
@@ -11,7 +12,17 @@ class DeckList extends Component {
     headerMode: 'none',
   }
 
+  componentWillMount() {
+    DeviceEventEmitter.addListener('deck list refresh', (e) => {
+      alert('DeviceEventEmitter deck refresh triggered')
+      this.refreshDecks()})
+  }
+
   componentDidMount () {
+    getDecks().then((decks) => this.setState({decks}))
+  }
+
+  refreshDecks () {
     getDecks().then((decks) => this.setState({decks}))
   }
 

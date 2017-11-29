@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, TextInput, TouchableOpacity, View, Text } from 'react-native'
+import { StyleSheet, Dimensions, TextInput, TouchableOpacity, View, Text, DeviceEventEmitter } from 'react-native'
+
+import { saveDeckTitle } from '../utils/storageAPI'
 
 export default class NewDeck extends Component {
   constructor (props) {
     super(props)
     this.state = { text: '',}
   }
-  
+
   render () {
     const styles = StyleSheet.create({
       container: {
@@ -24,6 +26,8 @@ export default class NewDeck extends Component {
         margin: 5,
       }
     })
+    const { goBack } = this.props.navigation
+
     return (
       <View style={styles.container}>
         <Text style={{fontSize: 40, textAlign: 'center'}}>
@@ -36,7 +40,11 @@ export default class NewDeck extends Component {
           value={this.state.text}
         />
         <TouchableOpacity
-          // onPress={}
+          onPress={() => {
+            saveDeckTitle(this.state.text)
+            DeviceEventEmitter.emit('deck list refresh', {})
+            goBack()
+          }}
           style={[styles.button, {backgroundColor: 'black'}]}>
           <Text style={{color: 'white'}}>Submit</Text>
         </TouchableOpacity>
