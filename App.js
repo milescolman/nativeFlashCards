@@ -7,6 +7,8 @@ import Deck from './components/Deck'
 import Quiz from './components/Quiz'
 import NewDeck from './components/NewDeck'
 import NewQuestion from './components/NewQuestion'
+import ScoreScreen from './components/ScoreScreen'
+import Score from './components/Score'
 import { Constants } from 'expo'
 import { white, purple } from './utils/colors'
 
@@ -70,6 +72,18 @@ const MainNavigator = StackNavigator({
     screen: Quiz,
     navigationOptions: ({ navigation }) => ({
       title: 'Quiz'
+    })
+  },
+  Score: {
+    screen: ScoreScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Score'
+    })
+  },
+  Score: {
+    screen: Score,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Score'
     })
   }
 },
