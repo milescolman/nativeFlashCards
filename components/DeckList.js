@@ -14,7 +14,6 @@ class DeckList extends Component {
 
   componentWillMount() {
     DeviceEventEmitter.addListener('deck list refresh', (e) => {
-      alert('DeviceEventEmitter deck refresh triggered')
       this.refreshDecks()})
   }
 

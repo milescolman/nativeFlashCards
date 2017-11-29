@@ -1,7 +1,29 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, DeviceEventEmitter } from 'react-native'
+
+import { getDeck } from '../utils/storageAPI'
 
 class Deck extends Component {
+  state = {
+    title: this.props.navigation.state.params.title,
+    questions: []
+  }
+  componentWillMount() {
+    DeviceEventEmitter.addListener('deck cards refresh', (e) => {
+      this.refreshCards()})
+  }
+
+  componentDidMount() {
+    this.refreshCards()
+  }
+
+  refreshCards() {
+    getDeck(this.props.navigation.state.params.title)
+      .then((deck) => {
+        this.setState((state) => ({...state, 'questions': deck['questions']}))
+      })
+  }
+
   render ()  {
     const styles = StyleSheet.create({
       title: {
@@ -28,11 +50,13 @@ class Deck extends Component {
       <View style={styles.alignment}>
         <View style={{alignItems: 'center'}}>
           <Text style={styles.title}>{state.params.title}</Text>
-          <Text style={{color: 'gray'}}>{state.params.questions.length} cards</Text>
+          <Text style={{color: 'gray'}}>{this.state.questions.length} cards</Text>
         </View>
         <View>
           <TouchableOpacity
-            onPress={() => navigate('NewQuestion')}
+            onPress={() => navigate('NewQuestion', {
+              title: state.params.title,
+            })}
             style={styles.button}>
             <Text style={{fontSize: 20}}>
               Add Card

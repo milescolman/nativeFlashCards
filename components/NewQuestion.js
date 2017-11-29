@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { TextInput, Text, View, TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
+import { TextInput, Text, View, TouchableOpacity, Dimensions, StyleSheet, DeviceEventEmitter } from 'react-native'
+
+import { addCardToDeck } from '../utils/storageAPI'
 
 export default class NewQuestion extends Component {
   constructor (props) {
@@ -28,6 +30,7 @@ export default class NewQuestion extends Component {
         margin: 5,
       },
     })
+    const { goBack } = this.props.navigation
 
     return (
       <View style={styles.container}>
@@ -43,7 +46,14 @@ export default class NewQuestion extends Component {
           onChangeText={(answer) => this.setState({answer})}
           value={this.state.answer}
         />
-        <TouchableOpacity style={[styles.button, {margin: 10}]}>
+        <TouchableOpacity
+          style={[styles.button, {margin: 10}]}
+          onPress={() => {
+            addCardToDeck (this.props.navigation.state.params.title, {question: this.state.question, answer: this.state.answer})
+            .then(() => DeviceEventEmitter.emit('deck cards refresh', {}) )
+            goBack()
+          }}
+        >
           <Text>Submit</Text>
         </TouchableOpacity>
       </View>
