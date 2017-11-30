@@ -11,6 +11,7 @@ import ScoreScreen from './components/ScoreScreen'
 import Score from './components/Score'
 import { Constants } from 'expo'
 import { white, purple } from './utils/colors'
+import { setLocalNotification } from './utils/notifications'
 
 function UdaciStatusBar ({ backgroundColor, ...props}) {
   return (
@@ -93,6 +94,10 @@ const MainNavigator = StackNavigator({
 )
 
 export default class App extends React.Component {
+  componentDidMount () {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>

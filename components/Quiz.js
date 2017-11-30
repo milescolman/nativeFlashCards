@@ -111,8 +111,6 @@ export default class Quiz extends Component {
                 </Text>
                 <TouchableOpacity
                   onPress={() => {
-                    console.log(this.value) // degbugging broken flipCard
-                    alert(this.value)
                     this.flipCard()}}
                 >
                   <Text style={{color: 'red'}}>
@@ -122,7 +120,6 @@ export default class Quiz extends Component {
               </Animated.View>
               <Animated.View style={[styles.backAnimatedStyle, styles.flipCardBack, {alignItems: 'center', backfaceVisibility: 'hidden', backgroundColor: 'white', opacity: this.backOpacity}]}>
                 <Text style={{fontSize: 30, textAlign: 'center'}}>
-                  {/* answer text */}
                   {`${answer}`}
                 </Text>
                 <TouchableOpacity
@@ -141,7 +138,7 @@ export default class Quiz extends Component {
                   this.setState((state) => ({...state, scoreNumerator: this.state.scoreNumerator + 1 }))
                   if (this.state.deck.questions.length == (this.state.questionIdx + 1)){
                     alert('nav')
-                    this.props.navigation.navigate('ScoreScreen')
+                    this.props.navigation.navigate('ScoreScreen', {title: 'Score'})
                   }
                   this.getNext()}}
 
