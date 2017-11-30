@@ -30,6 +30,9 @@ const Tabs = TabNavigator({
   },
   NewDeck: {
     screen: NewDeck,
+    navigationOptions: {
+      header: null,
+    }
   },
 },
 {
@@ -82,6 +85,7 @@ const MainNavigator = StackNavigator({
   }
 },
 {
+  mode: 'modal',
   headerMode: 'screen', // QUESTION: can't configure for individual screens?
 }
 )

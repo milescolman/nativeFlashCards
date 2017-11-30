@@ -8,8 +8,7 @@ class DeckList extends Component {
   state = { decks: {}}
 
   static navigationOptions = {
-    title: 'Welcome to DeckList',
-    headerMode: 'none',
+    header: null,
   }
 
   componentWillMount() {
