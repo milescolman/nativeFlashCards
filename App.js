@@ -32,6 +32,7 @@ const Tabs = TabNavigator({
     screen: NewDeck,
     navigationOptions: {
       header: null,
+      tabBarIcon: ({tintColor }) => <MaterialCommunityIcons name='creation' size={25}  color={tintColor}/>
     }
   },
 },
