@@ -27,25 +27,25 @@ export default class ScoreScreen extends Component {
         margin: 5,
       }
     })
-   const { navigate } = this.props.navigation
+   const { goBack } = this.props.navigation
 
     return (
       <View style={styles.container}>
         <Text style={{fontSize: 40}}>
-          Your score: {`${props.score}`}%
+          Your score: {`${this.props.navigation.state.params.score}`}%
         </Text>
         <View>
           <TouchableOpacity
-            onPress={() => navigate('Quiz')}
+            onPress={() => goBack()}
             style={styles.button}>
             <Text>
               Restart Quiz
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => NavigationActions.back({
-              key: 'Deck'
-            })}
+            onPress={() => {
+              goBack(this.props.navigation.state.params.screenKey)
+            }}
             style={styles.button}>
             <Text>
               Back to Deck

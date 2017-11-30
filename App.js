@@ -8,7 +8,6 @@ import Quiz from './components/Quiz'
 import NewDeck from './components/NewDeck'
 import NewQuestion from './components/NewQuestion'
 import ScoreScreen from './components/ScoreScreen'
-import Score from './components/Score'
 import { Constants } from 'expo'
 import { white, purple } from './utils/colors'
 import { setLocalNotification } from './utils/notifications'
@@ -75,14 +74,8 @@ const MainNavigator = StackNavigator({
       title: 'Quiz'
     })
   },
-  Score: {
+  ScoreScreen: {
     screen: ScoreScreen,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Score'
-    })
-  },
-  Score: {
-    screen: Score,
     navigationOptions: ({ navigation }) => ({
       title: 'Score'
     })

@@ -7,8 +7,8 @@ import { getDeck } from '../utils/storageAPI'
 
 export default class Quiz extends Component {
   state = {
-    questionIdx: 0,
     deck: {questions: []},
+    questionIdx: 0,
     scoreNumerator: 0,
   }
 
@@ -56,6 +56,21 @@ export default class Quiz extends Component {
   }
 
   getNext () {
+    if (this.state.deck.questions.length <= (this.state.questionIdx + 1)){
+      const score = this.state.scoreNumerator
+      this.setState((state) => ({
+          ...state,
+          questionIdx: -1,
+          scoreNumerator: 0,
+        }
+      ))
+      this.props.navigation.navigate('ScoreScreen', {
+        screenKey: this.props.navigation.state.key,
+        title: 'Score',
+        score: Math.floor(100 * score / this.state.deck.questions.length),
+        deckID: this.props.navigation.state.params.title,
+      })
+    }
     this.setState((state) => ({...state, questionIdx: state.questionIdx + 1}))
   }
 
@@ -135,13 +150,11 @@ export default class Quiz extends Component {
               <TouchableOpacity
                 style={[styles.button, {backgroundColor: 'green'}]}
                 onPress={() =>{
-                  this.setState((state) => ({...state, scoreNumerator: this.state.scoreNumerator + 1 }))
-                  if (this.state.deck.questions.length == (this.state.questionIdx + 1)){
-                    alert('nav')
-                    this.props.navigation.navigate('ScoreScreen', {title: 'Score'})
-                  }
-                  this.getNext()}}
-
+                  this.setState((state) => ({
+                    ...state,
+                    scoreNumerator: state.scoreNumerator + 1
+                  }), this.getNext)
+                }}
               >
                 <Text style={{color: 'white'}}>
                   Correct
@@ -149,12 +162,7 @@ export default class Quiz extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 style={[styles.button, {backgroundColor: 'red'}]}
-                onPress={() => {
-                  if (this.state.deck.questions.length == (this.state.questionIdx + 1)){
-                    alert('nav')
-                    navigate('ScoreScreen')
-                  }
-                  this.getNext()}}
+                onPress={() => {this.getNext()}}
               >
                 <Text style={{color: 'white'}}>
                   Incorrect
