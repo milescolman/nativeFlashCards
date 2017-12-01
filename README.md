@@ -1,6 +1,6 @@
 # Flash Card app (android)
 
-This project was developed and tested using Android. It *may* work on iOS.
+This project was developed and tested using Android: Android Studio Android Virtual Device Galaxy Nexus API 23 at 720 x 1280 resolution with Android 6.0 target. It *may* work on iOS.
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 ## Installation

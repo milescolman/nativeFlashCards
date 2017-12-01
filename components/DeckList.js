@@ -14,6 +14,8 @@ class DeckList extends Component {
   componentWillMount() {
     DeviceEventEmitter.addListener('deck list refresh', (e) => {
       this.refreshDecks()})
+    DeviceEventEmitter.addListener('deck cards refresh', (e) => {
+      this.refreshDecks()})
   }
 
   componentDidMount () {
