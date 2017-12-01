@@ -12,12 +12,13 @@ export default class Quiz extends Component {
     scoreNumerator: 0,
   }
 
+  listener = ({ value }) => {
+    this.value = value
+  }
   componentWillMount() {
     this.animatedValue = new Animated.Value(0)
     this.value = 0
-    this.animatedValue.addListener(({ value }) => {
-      this.value = value
-    })
+    this.animatedValue.addListener(this.listener)
     this.frontInterpolate = this.animatedValue.interpolate({
       inputRange: [0, 180],
       outputRange: ['0deg', '180deg'],
@@ -39,6 +40,10 @@ export default class Quiz extends Component {
   componentDidMount() {
     const id = this.props.navigation.state.params.title
     getDeck(id).then(deck => this.setState({deck}))
+  }
+
+  componentWillUnmount() {
+    this.animatedValue.removeListener(this.listener)
   }
 
   // flip card animation from https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
