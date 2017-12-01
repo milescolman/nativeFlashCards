@@ -2,6 +2,9 @@
 import { AsyncStorage } from 'react-native'
 import { Notifications, Permissions } from 'expo'
 
+//implemented like the udacity notifications
+//  eg https://github.com/udacity/reactnd-UdaciFitness-complete/commit/63778456f674355e40044c673f4b966ebd446866
+
 const NOTIFICATION_KEY = '@FlashCards:Notifications'
 
 export function clearLocalNotification () {

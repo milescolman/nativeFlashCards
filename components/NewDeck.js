@@ -41,10 +41,14 @@ export default class NewDeck extends Component {
         />
         <TouchableOpacity
           onPress={() => {
-            saveDeckTitle(this.state.text)
-            DeviceEventEmitter.emit('deck list refresh', {})
-            navigate('Deck', {title: this.state.text})
-          }}
+            if (this.state.text) {
+              saveDeckTitle(this.state.text)
+              DeviceEventEmitter.emit('deck list refresh', {})
+              navigate('Deck', {title: this.state.text})
+            } else {
+              alert('Enter a deck name first!')
+            }
+            }}
           style={[styles.button, {backgroundColor: 'black'}]}>
           <Text style={{color: 'white'}}>Submit</Text>
         </TouchableOpacity>

@@ -41,6 +41,8 @@ export default class Quiz extends Component {
     getDeck(id).then(deck => this.setState({deck}))
   }
 
+  // flip card animation from https://codedaily.io/screencasts/12/Create-a-Flip-Card-Animation-with-React-Native
+  // opacity added separately since backfaceVisibility is for ios only
   flipCard ()  {
     if (this.value >= 90) {
       Animated.timing(this.animatedValue, {

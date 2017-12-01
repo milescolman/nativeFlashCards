@@ -49,9 +49,13 @@ export default class NewQuestion extends Component {
         <TouchableOpacity
           style={[styles.button, {margin: 10}]}
           onPress={() => {
-            addCardToDeck (this.props.navigation.state.params.title, {question: this.state.question, answer: this.state.answer})
-            .then(() => DeviceEventEmitter.emit('deck cards refresh', {}) )
-            goBack()
+            if (this.state.question && this.state.answer) {
+              addCardToDeck (this.props.navigation.state.params.title, {question: this.state.question, answer: this.state.answer})
+              .then(() => DeviceEventEmitter.emit('deck cards refresh', {}) )
+              goBack()
+            } else {
+              alert('Enter a question and an answer first!')
+            }
           }}
         >
           <Text>Submit</Text>
