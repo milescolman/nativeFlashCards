@@ -74,6 +74,12 @@ export default class Quiz extends Component {
       })
     }
     this.setState((state) => ({...state, questionIdx: state.questionIdx + 1}))
+    this.value = 0
+    Animated.timing(this.animatedValue, {
+      toValue: 0,
+      duration: 0
+    }).start()
+
   }
 
 
@@ -92,8 +98,8 @@ export default class Quiz extends Component {
         margin: 5,
       },
       flipCardBack: {
-        position: 'absolute',
-        top: 0
+        //position: 'absolute', //BUG: causes sideways position shifts
+        top: 0,
       },
       frontAnimatedStyle: {
         transform: [
@@ -122,10 +128,20 @@ export default class Quiz extends Component {
             <View>
               <Animated.View style={[styles.frontAnimatedStyle, {alignItems: 'center', backfaceVisibility: 'hidden', backgroundColor: 'white', opacity: this.frontOpacity,}]}>
                 <Text style={{fontSize: 30, textAlign: 'center'}}>
-                  {/* question text */}
                   {`${question}`}
-                  {/* BUG: variable above breaks flipCard() animation */}
                 </Text>
+
+              </Animated.View>
+              <Animated.View style={[styles.backAnimatedStyle, styles.flipCardBack, {alignItems: 'center', backfaceVisibility: 'hidden', backgroundColor: 'white', opacity: this.backOpacity}]}>
+                <Text style={{fontSize: 30, textAlign: 'center'}}>
+                  {`${answer}`}
+                </Text>
+              </Animated.View>
+            </View>
+            <View>
+              <Animated.View
+                style={{opacity: this.frontOpacity}}
+              >
                 <TouchableOpacity
                   onPress={() => {
                     this.flipCard()}}
@@ -135,10 +151,9 @@ export default class Quiz extends Component {
                   </Text>
                 </TouchableOpacity>
               </Animated.View>
-              <Animated.View style={[styles.backAnimatedStyle, styles.flipCardBack, {alignItems: 'center', backfaceVisibility: 'hidden', backgroundColor: 'white', opacity: this.backOpacity}]}>
-                <Text style={{fontSize: 30, textAlign: 'center'}}>
-                  {`${answer}`}
-                </Text>
+              <Animated.View
+                style={styles.flipCardBack, {opacity: this.backOpacity}}
+              >
                 <TouchableOpacity
                   onPress={() => this.flipCard()}
                 >
